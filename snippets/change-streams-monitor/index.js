@@ -2,12 +2,12 @@
   const localRequire = require("module").createRequire(__filename);
 
   globalThis.listChangeStreams = function (
-    allUsers,
-    idleConnections,
-    idleCursors,
-    idleSessions,
-    localOps,
-    extended
+    allUsers = true,
+    idleConnections = true,
+    idleCursors = true,
+    idleSessions = true,
+    localOps = true,
+    extended = false
   ) {
     tableData = [];
     changeStreamsDataRaw = getChangeStreams(
