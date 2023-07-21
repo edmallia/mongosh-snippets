@@ -1,5 +1,5 @@
 {
-  "name": "@mongosh/snippet-spawn-mongod",
+  "name": "@edmallia/snippet-spawn-mongod",
   "snippetName": "spawn-mongod",
   "version": "1.0.1",
   "description": "Spin up a local mongod process",

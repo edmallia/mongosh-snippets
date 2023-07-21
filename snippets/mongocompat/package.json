@@ -1,5 +1,5 @@
 {
-  "name": "@mongosh/snippet-mongocompat",
+  "name": "@edmallia/snippet-mongocompat",
   "snippetName": "mongocompat",
   "version": "1.0.9",
   "description": "mongo compatibility script for mongosh",

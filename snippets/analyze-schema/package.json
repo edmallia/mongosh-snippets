@@ -1,5 +1,5 @@
 {
-  "name": "@mongosh/snippet-analyze-schema",
+  "name": "@edmallia/snippet-analyze-schema",
   "snippetName": "analyze-schema",
   "version": "1.0.5",
   "description": "schema(db.coll)",

@@ -1,5 +1,5 @@
 {
-  "name": "@mongosh/snippet-resumetoken",
+  "name": "@edmallia/snippet-resumetoken",
   "snippetName": "resumetoken",
   "version": "1.1.0",
   "description": "Resume token decoder script",
