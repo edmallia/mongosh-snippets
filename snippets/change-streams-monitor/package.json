@@ -1,0 +1,11 @@
+{
+  "name": "@edmallia/snippet-change-stream-monitor",
+  "snippetName": "change-stream-monitor",
+  "version": "0.0.1",
+  "description": "description",
+  "main": "index.js",
+  "license": "SSPL",
+  "publishConfig": {
+    "access": "public"
+  }
+}
