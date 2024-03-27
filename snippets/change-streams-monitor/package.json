@@ -7,5 +7,8 @@
   "license": "SSPL",
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "console-table-printer": "^2.12.0"
   }
 }

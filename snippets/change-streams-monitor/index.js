@@ -1,6 +1,8 @@
 (() => {
   const localRequire = require("module").createRequire(__filename);
 
+  const { printTable } = require("console-table-printer");
+
   globalThis.listChangeStreams = function (
     allUsers = true,
     idleConnections = true,
@@ -73,6 +75,15 @@
       }
     }
     customConsoleTable(tableData);
+
+    //Create a table
+  const testCases = [
+    { Rank: 3, text: 'I would like some Yellow', value: 100 },
+    { Rank: 4, text: 'I hope batch update is working', value: 300 },
+  ];
+
+  //print
+  printTable(testCases);
   };
 
   globalThis.ChangeStreamsData = function (
