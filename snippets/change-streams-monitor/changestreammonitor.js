@@ -6,8 +6,6 @@ function _listChangeStreams (extended = false, allUsers = true, nsFilter = []) {
   tableData = [];
   let changeStreamsDataRaw = getChangeStreams(allUsers, nsFilter);
 
-  print("Found " + changeStreamsDataRaw.length + " change streams");
-
   changeStreamsDataRaw.forEach(changeStreamOpData => {
     let clientDriver = "N/A";
     try {
@@ -69,6 +67,7 @@ function _listChangeStreams (extended = false, allUsers = true, nsFilter = []) {
   })
 
   customConsoleTable(tableData, extended);
+  print("Found " + changeStreamsDataRaw.length + " change streams");
 };
 
 function _listChangeStreamsHelp(){
@@ -265,7 +264,6 @@ globalThis.getChangeStreams = function (allUsers, nsFilter) {
   let backtrace = true;
   let localOps = true;
 
-  print(allUsers)
   let pipeline = [
     {
       $currentOp: {

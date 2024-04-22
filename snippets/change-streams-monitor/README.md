@@ -1,8 +1,20 @@
 # change-stream-monitor
 
+## Index <!-- omit from toc -->
+- [change-stream-monitor](#change-stream-monitor)
+  - [listChangeStreams(extended?: boolean, allUsers?: boolean, nsFilter?: Array)](#listchangestreamsextended-boolean-allusers-boolean-nsfilter-array)
+    - [Sample Output - Normal Mode](#sample-output---normal-mode)
+    - [Sample Output - Extended](#sample-output---extended)
+  - [listChangeStreams.help()](#listchangestreamshelp)
+  - [prettyPrintChangeStreamPipeline(connectionId: any)](#prettyprintchangestreampipelineconnectionid-any)
+    - [Example](#example)
+  - [prettyPrintChangeStreamPipeline.help()](#prettyprintchangestreampipelinehelp)
+  - [ChangeStreamsData.help()](#changestreamsdatahelp)
+  - [ExtendedChangeStreamsData.help()](#extendedchangestreamsdatahelp)
+
 This snippet allows mongosh users to monitor Change Streams on the current server.
 
-On installation of this snippet, the following functions are available to the user.
+On installation of this snippet, the following are available to the user.
 
 ## listChangeStreams(extended?: boolean, allUsers?: boolean, nsFilter?: Array<string>)
 
@@ -14,9 +26,27 @@ The behaviour of the function can be controlled with the available parameters (s
 * *allUsers* - Boolean that correspond's to the allUsers flag of the $currentOp MongoDB Pipeline Stage i.e. If set to false, $currentOp only reports on operations/idle connections/idle cursors/idle sessions belonging to the user who ran the command. If set to true, $currentOp reports operations belonging to all users. Defailts to true.
 * *nsFilter* - An optional array of namespace filter. Defaults to [] i.e. to filter.
 
+| Column Name    | Extended Output | Description                                                                                                                                                              |
+|----------------|-----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ConnID         | No              | An identifier for the connection where the specific operation originated.                                                                                                |
+| AppName        | No              | The identifier of the client application which ran the operation. Use the appName connection string option to set a custom value for the appName field.                  |
+| Remote         | No              | The IP address (or hostname) and the ephemeral port of the client connection where the operation originates.                                                             |
+| Driver         | No              | The MongoDB Driver used to connect and run the Change Stream.                                                                                                            |
+| NS             | No              |  The namespace the operation targets. A namespace consists of the database name and the collection name concatenated with a dot (.); that is, "<database>.<collection>". |
+| Type           | No              | The type of operation. Values are either: op / idleSession / idleCursor.                                                                                                 |
+| Pipeline       | No              | The Change Stream pipeline. Use prettyPrintChangeStreamPipeline(connId) to pretty print the full pipeline.                                                               |
+| LastAccessDate | No              | The date and time when the cursor was last used.                                                                                                                         |
+| Docs Returned  | No              | The cumulative number of documents returned by the cursor.                                                                                                               |
+| Active         | Yes             | A boolean value specifying whether the operation has started.                                                                                                            |
+| User           | Yes             | Users associated with the operation                                                                                                                                      |
+| CursorId       | Yes             | The ID of the cursor.                                                                                                                                                    |
+| CreatedDate    | Yes             | The date and time when the cursor was created.                                                                                                                           |
+
+
 ### Sample Output - Normal Mode
 
 ```
+replset [primary] test> listChangeStreams()
   ┏━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓
   ┃  ConnID   ┃  AppName   ┃  Remote      ┃  Driver      ┃  NS          ┃  Type  ┃  Pipeline    ┃  LastAccess  ┃  DocsReturn  ┃
   ┃           ┃            ┃              ┃              ┃              ┃        ┃              ┃  Date        ┃  ed          ┃
@@ -59,11 +89,13 @@ The behaviour of the function can be controlled with the available parameters (s
   │           │            │              │              │              │        │  }           │              │              │
   │           │            │              │              │              │        │  ]           │              │              │
   └───────────┴────────────┴──────────────┴──────────────┴──────────────┴────────┴──────────────┴──────────────┴──────────────┘
+Found 2 change streams
 ```
 
 ### Sample Output - Extended
 
 ```
+replset [primary] test> listChangeStreams(true)
   ┏━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┓
   ┃  ConnID  ┃  AppNam  ┃  Remote  ┃  Driver  ┃  NS      ┃  Type  ┃  Pipeli  ┃  LastAc  ┃  DocsRe  ┃  Active  ┃  User    ┃  Cursor  ┃  Create  ┃
   ┃          ┃  e       ┃          ┃          ┃          ┃        ┃  ne      ┃  cessDa  ┃  turned  ┃          ┃          ┃  Id      ┃  dDate   ┃
@@ -119,7 +151,11 @@ The behaviour of the function can be controlled with the available parameters (s
   │          │          │          │          │          │        │  }       │          │          │          │          │          │          │
   │          │          │          │          │          │        │  ]       │          │          │          │          │          │          │
   └──────────┴──────────┴──────────┴──────────┴──────────┴────────┴──────────┴──────────┴──────────┴──────────┴──────────┴──────────┴──────────┘
+Found 2 change streams
 ```
+
+## listChangeStreams.help()
+Provides help on how to use the function.
 
 ## prettyPrintChangeStreamPipeline(connectionId: any)
 
@@ -137,3 +173,12 @@ replset [primary] test> prettyPrintChangeStreamPipeline(74)
   }
 ]
 ```
+
+## prettyPrintChangeStreamPipeline.help()
+Provides help on how to use the function.
+
+## ChangeStreamsData.help()
+Describes the table output in normal mode.
+
+## ExtendedChangeStreamsData.help()
+Describes the table output in extended mode.
