@@ -1,7 +1,7 @@
 {
   "name": "@edmallia/snippet-change-stream-monitor",
   "snippetName": "change-stream-monitor",
-  "version": "0.0.5",
+  "version": "0.0.10",
   "description": "description",
   "main": "index.js",
   "license": "SSPL",
@@ -9,6 +9,6 @@
     "access": "public"
   },
   "dependencies": {
-    "console-table-printer": "^2.12.0"
+    "to-tabel": "^1.0.3"
   }
 }
